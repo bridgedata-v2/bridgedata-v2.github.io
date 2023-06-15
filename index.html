@@ -16,6 +16,70 @@
 
 <body>
     <div class="content-container">
-        <h2 class="title">BridgeData V2</h2>
+        <h2 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h2>
+        <img src="figures/teaser.png" width="700">
+        <p>
+            BridgeData V2 is a large and diverse dataset of robotic manipulation behaviors designed to
+            facilitate research in scalable robot learning. BridgeData V2 contains 53,896 trajectories collected across
+            24 environments on a publicly available low-cost robot. The dataset is compatible with open-vocabulary,
+            multi-task learning methods conditioned on goal images or natural language instructions.
+        </p>
+        <h2>Dataset</h2>
+        <h3>System Setup</h3>
+        <img src="figures/hardware.png" width="400">
+        <p>
+            All the data was collected on a WidowX 250 6DOF robot arm.
+            For sensing, we use an RGBD camera that is fixed
+            in an over-the-shoulder view, and two RGB cameras
+            with poses that are randomized during data collection.
+            The images are saved at a 640x480 resolution and the
+            control frequency is 5 Hz. We collect demonstrations
+            by teleoperating the robot with a VR controller
+        </p>
+        <h3>Data collection</h3>
+        <p>
+            To support broad generalization, we collected data for a wide range of tasks in many environments with
+            suitable variations in objects, camera pose, and workspace positioning. To support the evaluation
+            of multi-task learning methods, we collected demonstrations for many possible tasks simultaneously in each
+            environment. BridgeData V2 includes 13 skills that range in complexity:
+        </p>
+        <ul>
+            <li>Pick-and-place (includes reorienting objects in place)</li>
+            <li>Pushing objects</li>
+            <li>Wiping (e.g., wiping the table with a cloth)</li>
+            <li>Sweeping (e.g., sweeping beans into a pile)</li>
+            <li>Stacking</li>
+            <li>Folding cloths</li>
+            <li>Opening and closing drawers</li>
+            <li>Opening and closing doors</li>
+            <li>Opening and closing cardboard box flaps</li>
+            <li>Twisting knobs</li>
+            <li>Flipping switches</li>
+            <li>Zipping and unzipping</li>
+            <li>Turning levers</li>
+        </ul>
+        <p>
+            We used a crowdsourcing platform to label the data with language instructions. Annotators were asked to
+            describe the task being performed by the robot in each trajectory, with particular emphasis on the final
+            location of any moved objects.
+        </p>
+        <p>
+            To boost the robustness of the object repositioning skill we augmented the
+            expert demonstrations with data from a heavily randomized scripted pick and place policy. In total,
+            BridgeData V2 contains 44,165 expert demonstrations and 9,731 trajectories from a scripted policy collected
+            across 24 environments and with 100+ objects.
+        </p>
+        <h3>Dataset Composition</h3>
+        <p>
+            Below, we show a breakdown of the skills and environments represented in the demonstration data.
+        </p>
+        <img src="figures/combined.png" width="750" />
+        <h2>Evaluations of Offline Learning Methods</h2>
+        We evaluated several state-of-the-art offline learning methods using the data. We
+        selected both goal-conditioned methods (in the form of goal images) and language-conditioned
+        methods.
+        <h3>Seen Tasks</h3>
+        
+        <h3>Unseen Tasks</h3>
     </div>
 </body>

@@ -17,5 +17,5 @@ h3 {
     font-weight: 800;
     font-family: "Raleway", sans-serif;
     font-variant-ligatures: no-common-ligatures;
-    text-align: center;
+    /* text-align: center; */
 }
