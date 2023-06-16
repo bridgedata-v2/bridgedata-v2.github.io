@@ -17,7 +17,9 @@
 <body>
     <div class="content-container">
         <h2 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h2>
-        <img src="figures/teaser.png" width="700">
+        <!-- <div class="teaser">
+            <img src="figures/teaser.svg" />
+        </div>
         <p>
             BridgeData V2 is a large and diverse dataset of robotic manipulation behaviors designed to
             facilitate research in scalable robot learning. BridgeData V2 contains 53,896 trajectories collected across
@@ -26,7 +28,9 @@
         </p>
         <h2>Dataset</h2>
         <h3>System Setup</h3>
-        <img src="figures/hardware.png" width="400">
+        <div class="hardware">
+            <img src="figures/hardware.svg" />
+        </div>
         <p>
             All the data was collected on a WidowX 250 6DOF robot arm.
             For sensing, we use an RGBD camera that is fixed
@@ -73,13 +77,53 @@
         <p>
             Below, we show a breakdown of the skills and environments represented in the demonstration data.
         </p>
-        <img src="figures/combined.png" width="750" />
+        <img src="figures/combined.svg" width="750" /> -->
         <h2>Evaluations of Offline Learning Methods</h2>
         We evaluated several state-of-the-art offline learning methods using the data. We
         selected both goal-conditioned methods (in the form of goal images) and language-conditioned
         methods.
-        <h3>Seen Tasks</h3>
-        
-        <h3>Unseen Tasks</h3>
+        <div class="video-container">
+            <div class="video-header">
+                <h3>Seen Tasks</h3>
+                <div class="play-button"><div>Play</div> <img src="icons/play.svg" /></div>
+            </div>
+            <div class="video-grid">
+                <div class="method">Goal Image</div>
+                <div class="method">GCBC</div>
+                <div class="method">D-GCBC</div>
+                <div class="method">CRL</div>
+                <div class="method">ACT</div>
+                <div class="task"><img src="videos/goals/beans.png"/></div>
+                <div class="video"><video muted src="videos/beans/bc_beans.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/ddpm_beans.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/crl_beans.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/act_beans.mp4"></video></div>
+                <div class="task"><img src="videos/goals/drawer.png"/></div>
+                <div class="video"><video muted src="videos/drawer/bc_drawer_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/ddpm_drawer_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/crl_drawer_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/act_drawer_success.mp4"></video></div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        const playButtons = document.querySelectorAll('.play-button');
+        playButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                button.parentElement.parentElement.querySelectorAll('video').forEach((video) => {
+                    video.fastSeek(0);
+                    video.play();
+                });
+                const icon = button.querySelector('img');
+                icon.src = 'icons/replay.svg';
+                icon.classList.remove('replay');
+                void icon.offsetWidth;
+                icon.classList.add('replay');
+
+                const text = button.querySelector('div');
+                text.innerText = 'Replay';
+            });
+        });
+    </script>
 </body>
