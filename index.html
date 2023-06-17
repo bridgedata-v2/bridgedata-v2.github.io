@@ -87,9 +87,9 @@
         </p>
         <div class="video-container">
             <div class="video-header">
-                <h3>Seen Tasks</h3>
+                <h3>Seen Goal-Conditioned Tasks</h3>
                 <div class="play-button">
-                    <div>Play</div> <img src="icons/play.svg" />
+                    <img src="icons/play.svg" /> <div>Play</div>
                 </div>
             </div>
             <p>
@@ -120,6 +120,79 @@
                 <div class="video"><video muted src="videos/drawer/act_success.mp4"></video></div>
             </div>
         </div>
+
+        <div class="video-container">
+            <div class="video-header">
+                <h3>Unseen Goal-Conditioned Tasks</h3>
+                <div class="play-button">
+                    <img src="icons/play.svg" /> <div>Play</div>
+                </div>
+            </div>
+            <div class="video-grid">
+                <div class="method">Goal Image</div>
+                <div class="method">GCBC</div>
+                <div class="method">D-GCBC</div>
+                <div class="method">CRL</div>
+                <div class="method">ACT</div>
+                <div class="task"><img src="videos/goals/rice.png" /></div>
+                <div class="video"><video muted src="videos/rice/gcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/rice/ddpm_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/rice/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/rice/act_success.mp4"></video></div>
+                <div class="task"><img src="videos/goals/unseen_pnp.png" /></div>
+                <div class="video"><video muted src="videos/unseen_pnp/gcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_pnp/ddpm_fail.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_pnp/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_pnp/act_success.mp4"></video></div>
+                <div class="task"><img src="videos/goals/unseen_cloth.png" /></div>
+                <div class="video"><video muted src="videos/unseen_cloth/gcbc_fail.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_cloth/ddpm_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_cloth/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/unseen_cloth/act_success.mp4"></video></div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="video-header">
+                <h3>Seen Language-Conditioned Tasks</h3>
+                <div class="play-button">
+                    <img src="icons/play.svg" /> <div>Play</div>
+                </div>
+            </div>
+            <div class="video-grid lang">
+                <div class="method">Language Instruction</div>
+                <div class="method">LCBC</div>
+                <div class="method">RT-1</div>
+                <div class="task">put the carrot on the plate</div>
+                <div class="video"><video muted src="videos/carrot/lcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/carrot/rt1_success.mp4"></video></div>
+                <div class="task">flip the pot upright</div>
+                <div class="video"><video muted src="videos/flip_pot/lcbc_fail.mp4"></video></div>
+                <div class="video"><video muted src="videos/flip_pot/rt1_success.mp4"></video></div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="video-header">
+                <h3>Unseen Language-Conditioned Tasks</h3>
+                <div class="play-button">
+                    <img src="icons/play.svg" /> <div>Play</div>
+                </div>
+            </div>
+            <div class="video-grid lang">
+                <div class="method">Language Instruction</div>
+                <div class="method">LCBC</div>
+                <div class="method">RT-1</div>
+                <div class="task">put the mushroom in the pot</div>
+                <div class="video"><video muted src="videos/mushroom/lcbc_fail.mp4"></video></div>
+                <div class="video"><video muted src="videos/mushroom/rt1_success.mp4"></video></div>
+                <div class="task">move the cloth to the left</div>
+                <div class="video"><video muted src="videos/wipe_cloth/lcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/wipe_cloth/rt1_success.mp4"></video></div>
+            </div>
+        </div>
+    </div>
+
     </div>
 
     <script>
@@ -134,14 +207,15 @@
                     }
                     video.play();
                 });
-                const icon = button.querySelector('img');
-                icon.src = 'icons/replay.svg';
-                icon.classList.remove('replay');
-                void icon.offsetWidth;
-                icon.classList.add('replay');
+                const img = button.querySelector('img');
+                img.src = 'icons/replay.svg';
 
                 const text = button.querySelector('div');
                 text.innerText = 'Replay';
+
+                button.classList.remove('replay');
+                void button.offsetWidth;
+                button.classList.add('replay');
             });
         });
     </script>
