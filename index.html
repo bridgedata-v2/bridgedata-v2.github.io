@@ -16,7 +16,7 @@
 
 <body>
     <div class="content-container">
-        <h2 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h2>
+        <h1 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h1>
         <!-- <div class="teaser">
             <img src="figures/teaser.svg" />
         </div>
@@ -79,30 +79,45 @@
         </p>
         <img src="figures/combined.svg" width="750" /> -->
         <h2>Evaluations of Offline Learning Methods</h2>
-        We evaluated several state-of-the-art offline learning methods using the data. We
-        selected both goal-conditioned methods (in the form of goal images) and language-conditioned
-        methods.
+        <p>
+            We evaluated several state-of-the-art offline learning methods using the dataset. We
+            selected both goal-conditioned methods (in the form of goal images) and language-conditioned
+            methods. We evaluated on tasks that test a range of abilities. Below we show videos for some of the tasks
+            evaluated in the paper.
+        </p>
         <div class="video-container">
             <div class="video-header">
                 <h3>Seen Tasks</h3>
-                <div class="play-button"><div>Play</div> <img src="icons/play.svg" /></div>
+                <div class="play-button">
+                    <div>Play</div> <img src="icons/play.svg" />
+                </div>
             </div>
+            <p>
+                We first evaluated the methods on tasks that are seen in the training data. Note that even though these
+                tasks are seen in training, the methods must still generalize to novel object positions, distractor
+                objects, and lighting.
+            </p>
             <div class="video-grid">
                 <div class="method">Goal Image</div>
                 <div class="method">GCBC</div>
                 <div class="method">D-GCBC</div>
                 <div class="method">CRL</div>
                 <div class="method">ACT</div>
-                <div class="task"><img src="videos/goals/beans.png"/></div>
-                <div class="video"><video muted src="videos/beans/bc_beans.mp4"></video></div>
-                <div class="video"><video muted src="videos/beans/ddpm_beans.mp4"></video></div>
-                <div class="video"><video muted src="videos/beans/crl_beans.mp4"></video></div>
-                <div class="video"><video muted src="videos/beans/act_beans.mp4"></video></div>
-                <div class="task"><img src="videos/goals/drawer.png"/></div>
-                <div class="video"><video muted src="videos/drawer/bc_drawer_success.mp4"></video></div>
-                <div class="video"><video muted src="videos/drawer/ddpm_drawer_success.mp4"></video></div>
-                <div class="video"><video muted src="videos/drawer/crl_drawer_success.mp4"></video></div>
-                <div class="video"><video muted src="videos/drawer/act_drawer_success.mp4"></video></div>
+                <div class="task"><img src="videos/goals/beans.png" /></div>
+                <div class="video"><video muted src="videos/beans/gcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/ddpm_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/beans/act_success.mp4"></video></div>
+                <div class="task"><img src="videos/goals/pnp.png" /></div>
+                <div class="video"><video muted src="videos/pnp/gcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/pnp/ddpm_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/pnp/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/pnp/act_success.mp4"></video></div>
+                <div class="task"><img src="videos/goals/drawer.png" /></div>
+                <div class="video"><video muted src="videos/drawer/gcbc_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/ddpm_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/crl_success.mp4"></video></div>
+                <div class="video"><video muted src="videos/drawer/act_success.mp4"></video></div>
             </div>
         </div>
     </div>
@@ -112,7 +127,11 @@
         playButtons.forEach((button) => {
             button.addEventListener('click', () => {
                 button.parentElement.parentElement.querySelectorAll('video').forEach((video) => {
-                    video.fastSeek(0);
+                    try {
+                        video.fastSeek(0);
+                    } catch (error) {
+                        video.currentTime = 0;
+                    }
                     video.play();
                 });
                 const icon = button.querySelector('img');
