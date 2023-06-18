@@ -17,6 +17,13 @@
 <body>
     <div class="content-container">
         <h1 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h1>
+        <p>
+            BridgeData V2 is a large and diverse dataset of robotic manipulation behaviors designed to
+            facilitate research in scalable robot learning. BridgeData V2 contains 53,896 trajectories demonstrating 13
+            skills across 24 environments. The dataset is compatible with open-vocabulary, multi-task learning methods
+            conditioned on goal images or natural language instructions. In our experiments, we find that skills learned
+            from the data generalize to novel objects and environments, as well as across institutions.
+        </p>
         <!-- <div class="teaser">
             <img src="figures/teaser.svg" />
         </div>
@@ -82,11 +89,11 @@
         <p>
             We evaluated several state-of-the-art offline learning methods using the dataset. We
             selected both goal-conditioned methods (in the form of goal images) and language-conditioned
-            methods. We first evaluated the methods on tasks that are seen in the training data. Note that even though
+            methods. We first evaluated on tasks that are seen in the training data. Note that even though
             these tasks are seen in training, the methods must still generalize to novel object positions, distractor
-            objects, and lighting. Next, we evaluated the methods on tasks that require generalizing skills in the data
+            objects, and lighting. Next, we evaluated on tasks that require generalizing skills in the data
             to novel objects and environments. Below we show videos for some of the seen and unseen tasks evaluated in
-            the paper.
+            the paper. All videos are shown at their original speed.
         </p>
         <div class="video-container">
             <div class="video-header">
