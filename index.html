@@ -19,42 +19,59 @@
         <h1 class="title">BridgeData V2: A Dataset for Robot Learning at Scale</h1>
         <p>
             BridgeData V2 is a large and diverse dataset of robotic manipulation behaviors designed to
-            facilitate research in scalable robot learning. BridgeData V2 contains 53,896 trajectories demonstrating 13
-            skills across 24 environments. The dataset is compatible with open-vocabulary, multi-task learning methods
-            conditioned on goal images or natural language instructions. In our experiments, we find that skills learned
-            from the data generalize to novel objects and environments, as well as across institutions.
+            facilitate research in scalable robot learning. The dataset is compatible with open-vocabulary, multi-task
+            learning methods conditioned on goal images or natural language instructions. In our experiments, we find
+            that skills learned from the data generalize to novel objects and environments, as well as across
+            institutions.
         </p>
-        <!-- <div class="teaser">
-            <img src="figures/teaser.svg" />
-        </div>
-        <p>
-            BridgeData V2 is a large and diverse dataset of robotic manipulation behaviors designed to
-            facilitate research in scalable robot learning. BridgeData V2 contains 53,896 trajectories collected across
-            24 environments on a publicly available low-cost robot. The dataset is compatible with open-vocabulary,
-            multi-task learning methods conditioned on goal images or natural language instructions.
-        </p>
-        <h2>Dataset</h2>
-        <h3>System Setup</h3>
-        <div class="hardware">
-            <img src="figures/hardware.svg" />
-        </div>
-        <p>
-            All the data was collected on a WidowX 250 6DOF robot arm.
-            For sensing, we use an RGBD camera that is fixed
-            in an over-the-shoulder view, and two RGB cameras
-            with poses that are randomized during data collection.
-            The images are saved at a 640x480 resolution and the
-            control frequency is 5 Hz. We collect demonstrations
-            by teleoperating the robot with a VR controller
-        </p>
-        <h3>Data collection</h3>
+        <h2>Dataset Composition</h2>
         <p>
             To support broad generalization, we collected data for a wide range of tasks in many environments with
-            suitable variations in objects, camera pose, and workspace positioning. To support the evaluation
-            of multi-task learning methods, we collected demonstrations for many possible tasks simultaneously in each
-            environment. BridgeData V2 includes 13 skills that range in complexity:
+            variation in objects, camera pose, and workspace positioning. BridgeData V2 contains 53,896 trajectories
+            demonstrating 13 skills across 24 environments. Each trajectory is labeled with a natural langauge
+            instruction corresponding to the task the robot is performing.
+        <h3>Environments</h3>
+        <p>
+            A majority of the data comes from 7 distinct toy kitchens, which feature some combination of sinks,
+            stoves, and microwaves. The other environments include various tabletops, standalone toy sinks, a toy
+            laundry machine, a tool chest, and more. Below we show a sample of the environments.
         </p>
-        <ul>
+        <div class="gif-container">
+            <div class="gif-grid">
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/laundry_machine/put_clothes_in_laundry_machine/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/realkitchen1_dishwasher/pick_up_any_cup/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/tool_chest/pick_up_closest_rainbow_Allen_key_set/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v2/datacol2_tabletop_dark_wood/many_skills/00/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen6/put_beet_in_pot_sink/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen4/put_banana_in_pot_or_pan/0.gif"/></div>
+                <div class="gif"><img src="gifs/flap/toykitchen_sequential_tasks/toykitchen2/put_blueberry_on_plate_and_spoon_in_pot_or_pan_in_sink/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/realkitchen1_counter/pick_up_sponge_and_wipe_plate/0.gif"/></div>
+                <div class="gif"><img src="gifs/rss/toykitchen2/set_table/00/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toysink2_bww/put_knife_on_cutting_board/0.gif"/></div>
+            </div>
+        </div>
+        <h3>Skills</h3>
+        <p>
+            The data largely consists of the foundational skills of pick-and-place, pushing, and reorienting objects.
+            Other skills involve environment manipulation, which includes opening and closing doors and drawers. The
+            remaining data comes from more complex skills, such as stacking blocks, folding cloths, and sweeping
+            granular media. Below we show a sample of the skills.
+        </p>
+        <div class="gif-container">
+            <div class="gif-grid">
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toysink1_room8052/flip_pot_upright_which_is_in_sink/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen1/put_banana_on_plate/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v2/datacol2_folding_table/fold_cloth_pnp/01/0.gif"/></div>
+                <div class="gif"><img src="gifs/icra/toykitchen_fixed_cam_resetfree_push_sweep/toykitchen6/00/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen5/close_cabinet/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen2_room8052/turn_lever_vertical_to_front/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v1/berkeley/toykitchen2_room8052/flip_salt_upright/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v2/datacol2_toykitchen7/sweep_granular/00/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v2/datacol2_toykitchen7/drawer_pnp/01/0.gif"/></div>
+                <div class="gif"><img src="gifs/bridge_data_v2/deepthought_folding_table/stack_blocks/01/0.gif"/></div>
+            </div>
+        </div>
+        <!-- <ul>
             <li>Pick-and-place (includes reorienting objects in place)</li>
             <li>Pushing objects</li>
             <li>Wiping (e.g., wiping the table with a cloth)</li>
@@ -68,28 +85,12 @@
             <li>Flipping switches</li>
             <li>Zipping and unzipping</li>
             <li>Turning levers</li>
-        </ul>
-        <p>
-            We used a crowdsourcing platform to label the data with language instructions. Annotators were asked to
-            describe the task being performed by the robot in each trajectory, with particular emphasis on the final
-            location of any moved objects.
-        </p>
-        <p>
-            To boost the robustness of the object repositioning skill we augmented the
-            expert demonstrations with data from a heavily randomized scripted pick and place policy. In total,
-            BridgeData V2 contains 44,165 expert demonstrations and 9,731 trajectories from a scripted policy collected
-            across 24 environments and with 100+ objects.
-        </p>
-        <h3>Dataset Composition</h3>
-        <p>
-            Below, we show a breakdown of the skills and environments represented in the demonstration data.
-        </p>
-        <img src="figures/combined.svg" width="750" /> -->
+        </ul> -->
         <h2>Evaluations of Offline Learning Methods</h2>
         <p>
             We evaluated several state-of-the-art offline learning methods using the dataset. We
             selected both goal-conditioned methods (in the form of goal images) and language-conditioned
-            methods. We first evaluated on tasks that are seen in the training data. Note that even though
+            methods. We first evaluated on tasks that are seen in the training data. Even though
             these tasks are seen in training, the methods must still generalize to novel object positions, distractor
             objects, and lighting. Next, we evaluated on tasks that require generalizing skills in the data
             to novel objects and environments. Below we show videos for some of the seen and unseen tasks evaluated in
@@ -200,6 +201,20 @@
                 <div class="video"><video muted src="videos/wipe_cloth/rt1_success.mp4"></video></div>
             </div>
         </div>
+
+        <h2>System Setup</h2>
+        <div class="hardware">
+            <img src="figures/hardware.svg" />
+        </div>
+        <p>
+            All the data was collected on a WidowX 250 6DOF robot arm. We collect demonstrations
+            by teleoperating the robot with a VR controller. The control frequency is 5 Hz and the average trajectory
+            length is 38 timesteps. For sensing, we use an RGBD camera that is fixed in an over-the-shoulder view, and
+            two RGB cameras with poses that are randomized during data collection. The images are saved at a 640x480
+            resolution.
+        </p>
+
+
     </div>
 
     </div>
