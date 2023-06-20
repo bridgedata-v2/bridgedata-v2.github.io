@@ -49,14 +49,19 @@ h3 {
 
 .video-container {
     margin: 2rem 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-grid-container {
+    display: flex;
 }
 
 .video-grid {
-    display: inline-grid;
+    display: grid;
     grid-template-columns: repeat(5, minmax(0, 200px));
-    grid-auto-flow: row;
     justify-items: center;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
 
@@ -68,24 +73,17 @@ h3 {
     margin-right: auto;
 }
 
-.gif-grid {
-    display: inline-grid;
-    grid-template-columns: repeat(5, minmax(0, 200px));
-    grid-auto-flow: row;
-    justify-items: center;
-    align-items: center;
-    gap: 0.5rem;
+.video-teaser {
+    margin-top: 0;
+}
 
-    background-color: rgba(0, 0, 0, 0.16);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1rem;
+.video-teaser>div>h3 {
+    margin-top: 0;
 }
 
 .video-grid.lang {
     grid-template-columns: repeat(3, minmax(0, 200px));
+    text-align: center;
 }
 
 .video-grid>.method {
@@ -95,7 +93,7 @@ h3 {
 .video-grid>.task {
     border: 2pt solid rgba(255, 0, 0, 0.475);
     border-radius: 1pt;
-    margin: 0 1rem;
+    width: 85%;
 }
 
 .video-grid.lang>.task {
