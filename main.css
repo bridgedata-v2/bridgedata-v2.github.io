@@ -81,6 +81,19 @@ h3 {
     margin-top: 0;
 }
 
+.video-teaser>.video>img {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .video-teaser>.video>img {
+        display: block;
+    }
+    .video-teaser>.video>video {
+        display: none;
+    }
+}
+
 .video-grid.lang {
     grid-template-columns: repeat(3, minmax(0, 200px));
     text-align: center;
