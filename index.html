@@ -168,6 +168,27 @@
             <li>Zipping and unzipping</li>
             <li>Turning levers</li>
         </ul> -->
+        <div class="video-container">
+            <div class="video-header">
+                <h2>View a Random Trajectory</h2>
+                <div id="sample-button">
+                    <img src="icons/replay.svg" />
+                    <div>Sample</div>
+                </div>
+            </div>
+            <div class="video-grid lang">
+                <div class="method">Language Annotation</div>
+                <div class="method">Initial</div>
+                <div class="method">Final</div>
+                <div class="task" id="annotation">[language annotation]</div>
+                <div class="video"><img id="first_image" src="#" /></div>
+                <div class="video"><img id="last_image" src="#" /></video></div>
+            </div>
+        </div>
+        <p>
+            Use the "Sample" button to view a random trajectory from the dataset! We show the intial and final
+            states of the trajectory, as well as the corresponding natural language annotation.
+        </p>
         <h2>Evaluations of Offline Learning Methods</h2>
         <p>
             We evaluated several state-of-the-art offline learning methods using the dataset. We first evaluated
@@ -362,6 +383,60 @@
                 void button.offsetWidth;
                 button.classList.add('replay');
             });
+        });
+
+        // View Random Trajectory Widget
+        var GetFileBlobUsingURL = function (url, convertBlob) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.responseType = "blob";
+            xhr.addEventListener('load', function () {
+                convertBlob(xhr.response);
+            });
+            xhr.send();
+        };
+
+        var blobToFile = function (blob, name) {
+            blob.lastModifiedDate = new Date();
+            blob.name = name;
+            return blob;
+        };
+
+        var GetFileObjectFromURL = function (filePathOrUrl, convertBlob) {
+            GetFileBlobUsingURL(filePathOrUrl, function (blob) {
+                convertBlob(blobToFile(blob, 'traj_links.csv'));
+            });
+        };
+
+        const FileURL = "traj_links.csv"
+        const prefix = "https://rail.eecs.berkeley.edu/datasets/bridge_release/"
+        GetFileObjectFromURL(FileURL, function (fileObject) {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                const file = event.target.result;
+                allLines = file.split(/\r\n|\n/);
+                var index = Math.floor(Math.random() * allLines.length);
+                const links = allLines[index].split(",");
+                document.querySelector("#first_image").src = prefix + links[0]
+                document.querySelector("#last_image").src = prefix + links[1]
+                document.querySelector("#annotation").innerText = links[2]
+            };
+
+            reader.readAsText(fileObject);
+        });
+
+        const sampleButton = document.querySelector('#sample-button');
+        sampleButton.addEventListener('click', () => {
+            var index = Math.floor(Math.random() * allLines.length);
+            const links = allLines[index].split(",");
+            document.querySelector("#first_image").src = prefix + links[0]
+            document.querySelector("#last_image").src = prefix + links[1]
+            document.querySelector("#annotation").innerText = links[2]
+
+            sampleButton.classList.remove('replay');
+            void sampleButton.offsetWidth;
+            sampleButton.classList.add('replay');
         });
     </script>
 </body>

@@ -172,3 +172,30 @@ h3 {
         transform: rotate(-360deg);
     }
 }
+
+#sample-button {
+    cursor: pointer;
+    display: flex;
+    margin-left: 1rem;
+    background-color: rgb(44, 177, 244);
+    border-radius: 5pt;
+    padding: 2pt 3pt;
+    align-items: center;
+}
+
+#sample-button:active {
+    background-color: rgb(44, 177, 244, 0.5);
+}
+
+#sample-button>img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+#sample-button>div {
+    margin-bottom: 1pt;
+    margin-right: 2pt;
+    font-family: "Open Sans", sans-serif;
+    font-size: 10pt;
+}
