@@ -184,9 +184,9 @@
                 <div class="method">Language Annotation</div>
                 <div class="method">Initial</div>
                 <div class="method">Final</div>
-                <div class="task" id="annotation">[language annotation]</div>
-                <div class="video"><img id="first_image" src="#" /></div>
-                <div class="video"><img id="last_image" src="#" /></video></div>
+                <div class="task" id="annotation">loading...</div>
+                <div class="video"><img id="first_image" src="icons/dots.jpg" /></div>
+                <div class="video"><img id="last_image" src="icons/dots.jpg" /></video></div>
             </div>
         </div>
         <p>
@@ -364,7 +364,8 @@
     </div>
 
     <script>
-        new Image().src = 'icons/replay.svg'
+        // replay button animation
+        new Image().src = 'icons/replay.svg' // preload
 
         const playButtons = document.querySelectorAll('.play-button');
         playButtons.forEach((button) => {
@@ -390,53 +391,36 @@
         });
 
         // View Random Trajectory Widget
-        var GetFileBlobUsingURL = function (url, convertBlob) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
-            xhr.responseType = "blob";
-            xhr.addEventListener('load', function () {
-                convertBlob(xhr.response);
-            });
-            xhr.send();
-        };
+        var trajLinks;
+        fetch("traj_links.csv")
+            .then(response => response.text())
+            .then(text => trajLinks = text.split(/\r\n|\n/))
+            .then(sample);
 
-        var blobToFile = function (blob, name) {
-            blob.lastModifiedDate = new Date();
-            blob.name = name;
-            return blob;
-        };
+        const prefix = "https://rail.eecs.berkeley.edu/datasets/bridge_release/";
+        const firstImage = document.querySelector("#first_image");
+        const lastImage = document.querySelector("#last_image");
+        const annotation = document.querySelector("#annotation");
+        function sample() {
+            if (typeof trajLinks === 'undefined') return;
 
-        var GetFileObjectFromURL = function (filePathOrUrl, convertBlob) {
-            GetFileBlobUsingURL(filePathOrUrl, function (blob) {
-                convertBlob(blobToFile(blob, 'traj_links.csv'));
-            });
-        };
+            firstImage.src = 'icons/dots.jpg';
+            lastImage.src = 'icons/dots.jpg';
+            annotation.innerText = 'loading...';
 
-        const FileURL = "traj_links.csv"
-        const prefix = "https://rail.eecs.berkeley.edu/datasets/bridge_release/"
-        GetFileObjectFromURL(FileURL, function (fileObject) {
-            const reader = new FileReader();
+            const index = Math.floor(Math.random() * trajLinks.length);
+            const links = trajLinks[index].split(",");
 
-            reader.onload = (event) => {
-                const file = event.target.result;
-                allLines = file.split(/\r\n|\n/);
-                var index = Math.floor(Math.random() * allLines.length);
-                const links = allLines[index].split(",");
-                document.querySelector("#first_image").src = prefix + links[0]
-                document.querySelector("#last_image").src = prefix + links[1]
-                document.querySelector("#annotation").innerText = links[2]
-            };
-
-            reader.readAsText(fileObject);
-        });
+            firstImage.src = prefix + links[0];
+            lastImage.src = prefix + links[1];
+            annotation.innerText = links[2];
+        }
 
         const sampleButton = document.querySelector('#sample-button');
         sampleButton.addEventListener('click', () => {
-            var index = Math.floor(Math.random() * allLines.length);
-            const links = allLines[index].split(",");
-            document.querySelector("#first_image").src = prefix + links[0]
-            document.querySelector("#last_image").src = prefix + links[1]
-            document.querySelector("#annotation").innerText = links[2]
+            if (firstImage.src.includes('dots.jpg') || lastImage.src.includes('dots.jpg')) return;
+
+            sample();
 
             sampleButton.classList.remove('replay');
             void sampleButton.offsetWidth;
